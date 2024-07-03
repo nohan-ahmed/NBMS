@@ -1,0 +1,23 @@
+<p>Dear {{ user.first_name }} {{user.last_name}}</p>
+
+<p>
+  We are pleased to inform you that your recent deposit has been successfully
+  processed. Below are the details of the transaction:
+</p>
+
+<ul>
+  <li><strong>Amount Deposited:</strong> ${{ amount }}</li>
+  <li><strong>Account Balance:</strong> ${{ user.account.balance }}</li>
+</ul>
+
+<p>
+  If you have any questions or need further assistance, please feel free to
+  contact us at nbms123@gmail.com.
+</p>
+
+<p>Thank you for banking with us!</p>
+
+<p>Best regards,</p>
+
+<h2 style="text-align: end; margin-right: 105px">Team NBMS</h2>
+

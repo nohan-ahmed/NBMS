@@ -1,0 +1,10 @@
+<!-- templates/borrow/return_confirmation.html -->
+{% extends "base.html" %}
+{% block content %}
+  <h1>Return Book</h1>
+  <p>Are you sure you want to return this book?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+  </form>
+{% endblock %}

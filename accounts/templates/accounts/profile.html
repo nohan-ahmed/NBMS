@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css %}
+  <link rel="stylesheet" href="{% static "css/account.css"%}">
+{% endblock css %}
+
+
+{% block content %}
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="{{user.profile_pic.url}}" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3">{{user.first_name}} {{user.last_name}}</h5>
+              <p class="text-muted mb-1">{{user.bio}}</p>
+              <p class="text-muted mb-4">Bay Area, {{user.account.address}}, {{user.account.city}}</p>
+              <div class="d-flex justify-content-center mb-2">
+                <a href="{% url "profile_update" %}" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Update Info</a>
+                <a href="{% url "password_change" %}" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Change password</a>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <b>Balance:</b><i class="fa-solid fa-dollar-sign">{{user.account.balance}}</i>
+                  <a href="{% url "deposite" %}" class="btn btn-primary">Deposite Now</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+                <div class="card-body">
+                  <section class="intro">
+                    <div class="gradient-custom-1 h-100">
+                      <div class="mask d-flex align-items-center h-100">
+                        <div class="container">
+                          <div class="row justify-content-center">
+                            <div class="col-12">
+                              <div class="table-responsive bg-white">
+                                <table class="table mb-0">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col" style="width: 5%;">ID</th>
+                                      <th scope="col" style="width: 35%;">BOOK</th>
+                                      <th scope="col" style="width: 5%;">PRICE</th>
+                                      <th scope="col" style="width: 17%;">BORROW DATE</th>
+                                      <th scope="col" style="width: 18%;">RETURN DATE</th
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {% for borrow in account.borrow_history.all %}
+                                    <tr>
+                                      <th scope="row" style="color: #666666;">{{borrow.id}}</th>
+                                      <td>{{borrow.book}}</td>
+                                      <td>${{borrow.book.price}}</td>
+                                      <td>{{borrow.borrow_date}}</td>
+                                      {% if borrow.is_return%}
+                                        <td>{{borrow.return_date}}</td>
+                                      {% else %}
+                                        <td><a href="{% url "return_now" borrow.id %}" class="btn btn-info">Return Now</a></td>
+                                      {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+

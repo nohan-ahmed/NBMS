@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2 class='display-6 my-4 text-center'>Borrowing page</h2>
+<form action="" method='POST' novalidate style='width: 55%; margin: auto;'>
+    {% csrf_token %}
+    <p>Customer: {{user.username}}</p>
+    <p>Book name: {{book.title}}</p>
+    {{form|crispy}}
+    <p>Total Price: $<span id="total-price">{{book.price}}</span></p>
+    <button type="submit" class="btn btn-primary mt-2">Confirm</button>
+</form>
+{% endblock content %}
+
+{% block add_js %}
+<script src="{% static 'js/order.js' %}"></script>
+{% endblock add_js %}

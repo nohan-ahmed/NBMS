@@ -1,0 +1,73 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+<div class="row p-5 align-items-center" style="background-image:url('static/img/linear-gradient for sero section.jpeg');background-size:cover">
+    <div class="col-md-6">
+        <h1>Borrow your favorite books</h1>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo pariatur quam ducimus nam consectetur explicabo velit voluptas eos. Esse libero assumenda excepturi eveniet hic commodi enim veniam tenetur expedita! Officiis!</p>
+        <div class="d-flex gap-2">
+            <a href="" class="btn btn-dark">Call Us</a>
+            <a href="" class="btn btn-outline-dark">Know More</a>
+        </div>
+    </div>
+    <div class="col-md-6 text-center">
+        <img src="{% static "img/hero-section.png" %}" class="img-fluid rounded-circle w-75" alt="Hero section was not found">
+    </div>
+
+    <!-- Category section -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url "home" %}">All</a>
+      </li>
+      {% for cat in categories %}
+      <li class="nav-item">
+        <a class="nav-link text-dark" aria-current="page" href="{% url "category" cat.slug %}">{{cat.name}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <!-- Book section -->
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+          <div class="row row-cols-md-2 row-cols-1  row-cols-lg-4">
+            {% for book in books %}
+            <div class="col">
+              <div class="card">
+                <div class="d-flex justify-content-between p-3">
+                  <p class="lead mb-0">Today's Combo Offer</p>
+                  <div
+                    class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                    style="width: 35px; height: 35px;">
+                    <p class="text-white mb-0 small">x4</p>
+                  </div>
+                </div>
+                <img src="{{book.image.url}}"
+                  class="card-img-top" alt="Laptop" />
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <p class="small">
+                      <a href="#!" class="text-muted">{{book.category.all.0}}</a>, 
+                      <a href="#!" class="text-muted">{{book.category.all.1}}</a>, <a href="#"  class="text-muted">More</a>
+                    </p>
+                    <p class="small text-danger"><s>${{book.price}}</s></p>
+                  </div>
+      
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="mb-0">{{book.title}}</h6>
+                    <h5 class="text-dark mb-0">${{book.price}}</h5>
+                  </div>
+      
+                  <div class="d-flex justify-content-between mb-2">
+                   <a href="{% url "detail_book" book.slug book.id %}" class="btn btn-primary">Details</a>
+                    <div class="ms-auto text-warning">
+                        <a href="{% url "borrow_now" book.id %}" class='btn btn-success small'>Borrow Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+</div> 
+{% endblock %}

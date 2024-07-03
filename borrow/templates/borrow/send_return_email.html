@@ -1,0 +1,23 @@
+<p>Dear {{ user.first_name }} {{user.last_name}}</p>
+<p>
+  We are pleased to confirm that you have successfully returned the book titled
+  "<strong>{{ book.title }}</strong>" to our library. Below are the details of
+  the returned item:
+</p>
+
+<ul>
+  <li><strong>Book Title:</strong> {{ book.title }}</li>
+  <li><strong>Author:</strong> {{ book.author }}</li>
+  <li><strong>Return Date:</strong> {{ return_date }}</li>
+</ul>
+
+<p>Thank you for returning the book on time. We hope you enjoyed reading it.</p>
+
+<p>
+  If you have any questions or need assistance, feel free to contact us at
+  nbms123@gmail.com. We look forward to serving you again soon.
+</p>
+
+<p>Best regards,</p>
+
+<h2 style="text-align: end; margin-right: 105px">Team NBMS</h2>

@@ -1,0 +1,100 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  <!-- content -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row gx-5">
+        <aside class="col-lg-6">
+          <div class="border rounded-4 mb-3 d-flex justify-content-center">
+            <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big.webp">
+              <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="{{book.image.url}}" />
+            </a>
+          </div>
+
+          <!-- thumbs-wrap.// -->
+          <!-- gallery-wrap .end// -->
+        </aside>
+        <main class="col-lg-6">
+          <div class="ps-lg-3">
+            <h4 class="title text-dark">
+             {{book.title}}
+            </h4>
+  
+            <div class="mb-3">
+              Price: <span class="h5">${{book.price}}</span>
+              {% comment %} <span class="text-muted">/per box</span> {% endcomment %}
+            </div>
+  
+            <p>
+              {{book.description}}
+            </p>
+  
+            <div class="row">
+              <dt class="col-3">Page:</dt>
+              <dd class="col-9">{{book.page}}</dd> 
+              <dt class="col-3">Author:</dt>
+              <dd class="col-9">{{book.author}}</dd>
+              <dt class="col-3">Rating:</dt>
+              <dd class="col-9">{{average_rating}}</dd>
+            </div>
+  
+            <hr />
+        
+            <a href="{% url "borrow_now" book.id %}" class='btn btn-warning small'>Borrow Now</a>      
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+  <!-- content -->
+  
+  <section class="bg-light border-top py-4">
+    <div class="container">
+      <div class="row gx-4">
+        <div class="col-lg-8 mb-4">
+          <div class="border rounded-2 px-3 py-2 bg-white">
+            <form action="" method='POST' novalidate>
+                {% csrf_token %}
+                <!--{{form|crispy}} -->
+                {% comment %} handle errors which from backend {% endcomment %}
+                {% for error in form.non_field_errors  %} 
+                    <p class='bg-danger p-3 text-white'>{{error}}</p>
+                {% endfor %}
+                
+                {% for input in form  %}
+                    {{input.label_tag}}
+                    {{input}}
+                    {{input.errors | striptags}}
+                {% endfor %}
+                <br>
+                {% if user.is_authenticated %}
+                  <button type="submit" class='btn btn-primary'>Submit</button>
+                {% else %}
+                  <a href="{% url "login" %}" class='btn btn-secondary'>Submit</a>
+                {% endif %}
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-8 mb-4">
+          <div class="border rounded-2 px-3 py-2 bg-white">
+            
+            <div class="card m-2">
+              <h5 class="p-3">Total Reviews : {{reviews.all | length}}</h5>
+              {% for review in reviews.all %}
+              <div class="card-body border m-2">
+                  <p><b>{{review.user.user.username}}</b> {{review.created_at}}</p>
+                  <p><b>Rating</b> {{review.rating}}</p>
+                  <p>{{review.comment}}</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

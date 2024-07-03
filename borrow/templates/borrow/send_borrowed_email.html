@@ -1,0 +1,30 @@
+<p>Dear {{ user.first_name }} {{user.last_name}}</p>
+
+<p>
+  We are pleased to inform you that you have successfully borrowed the book
+  titled "<strong>{{ book.title }}</strong>" from our library. Below are the
+  details of your borrowed item:
+</p>
+
+<ul>
+  <li><strong>Book Title:</strong> {{ book.title }}</li>
+  <li><strong>Author:</strong> {{ book.author }}</li>
+  <li><strong>Borrow Date:</strong> {{ book.borrow_date }}</li>
+  <li><strong>Is_Return:</strong> False</li>
+</ul>
+
+<p>
+  Please ensure that the book is returned by the due date to avoid any late
+  fees. You can renew the book online through your library account if you need
+  more time to finish reading.
+</p>
+
+<p>
+  If you have any questions or need assistance, feel free to contact us at nbms123@gmail.com
+</p>
+
+<p>Happy Reading!</p>
+
+<p>Best regards,</p>
+
+<h2 style="text-align: end; margin-right: 105px">Team NBMS</h2>
