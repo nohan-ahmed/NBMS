@@ -1,7 +1,6 @@
 asgiref==3.7.2
 beautifulsoup4==4.12.3
 blinker==1.4
-command-not-found==0.3
 crispy-bootstrap5==2024.2
 cryptography==3.4.8
 dbus-python==1.2.18
