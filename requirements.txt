@@ -1,7 +1,6 @@
 asgiref
 beautifulsoup4
 blinker
-command-not-found
 crispy-bootstrap5
 cryptography
 dbus-python
