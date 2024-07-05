@@ -32,6 +32,7 @@ SECRET_KEY = 'django-insecure-&q7e-zld=xl#oy#+avkg9c^e29fpyu5euuicja7i06b9d73c-a
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://nbms1.onrender.com', 'http://*.127.0.0.1']
 
 
 # Application definition
