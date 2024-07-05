@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+# Import dj-database-url at the beginning of the file.
+import dj_database_url
 # for postgres
 import environ
 env = environ.Env()
@@ -96,18 +97,27 @@ WSGI_APPLICATION = 'library_management.wsgi.application'
 # }
 
 # Your secret key
-SECRET_KEY = env("SECRET_KEY")
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
-}
+# SECRET_KEY = env("SECRET_KEY")
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER': env("DB_USER"),
+#         'PASSWORD': env("DB_PASSWORD"),
+#         'HOST': env("DB_HOST"),
+#         'PORT': env("DB_PORT"),
+#     }
+# }
 
+
+# Replace the SQLite DATABASES configuration with PostgreSQL:
+DATABASES = {
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://nbms_db_user:IvMJX3lH1J7UKDYVac9aAGACGmzkfwd5@dpg-cq3ofdbqf0us73dkmtt0-a.oregon-postgres.render.com/nbms_db',
+        conn_max_age=600
+    )
+}
 
 # set-up email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
