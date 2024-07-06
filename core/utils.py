@@ -5,6 +5,7 @@ def send_email(user, borrow, subject, template):
     message = render_to_string(template, {
         'user': user,
         'book':borrow.book,
+        'borrow_date':borrow.borrow_date,
         'return_date':borrow.return_date,
     })
     

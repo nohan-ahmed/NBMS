@@ -32,7 +32,7 @@ class BorrowView(LoginRequiredMixin, CreateView):
         book = get_object_or_404(Book, pk=pk) if pk else None
 
         if book and account.balance < book.price:
-            messages.error(self.request, f"You don't have enough balance to borrow this book! Your current balance is ${account.balance}")
+            messages.info(self.request, f"You don't have enough balance to borrow this book! Your current balance is ${account.balance}")
             return self.form_invalid(form)
         else:
             if book:
